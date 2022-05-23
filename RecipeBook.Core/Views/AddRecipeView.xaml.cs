@@ -24,5 +24,10 @@ namespace RecipeBook.Core.Views
         {
             InitializeComponent();
         }
+
+        private void Prescription_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

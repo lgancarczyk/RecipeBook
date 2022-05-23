@@ -17,7 +17,7 @@
             <TextBlock Grid.Column="0"
                        Grid.Row="0"
                        Text="CookBook"
-                       FontSize="40"
+                       FontSize="25"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
                        Foreground="GhostWhite"/>
@@ -40,7 +40,8 @@
             </StackPanel>
 
             <ContentControl Grid.Column="1"
-                            Grid.Row="1"
+                            Grid.Row="0"
+                            Grid.RowSpan="2"
                             Margin="10"
                             Content="{Binding CurrentView}"/>
 
@@ -52,7 +53,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="150"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
