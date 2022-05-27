@@ -30,6 +30,10 @@ namespace RecipeBook.Core.Core
         {
             //checks if all values are true 
             return !string.IsNullOrEmpty(_addRecipeViewModel.Title) 
+                && !string.IsNullOrEmpty(_addRecipeViewModel.Tags)
+                && !string.IsNullOrEmpty(_addRecipeViewModel.NoOfPortions)
+                && !string.IsNullOrEmpty(_addRecipeViewModel.Ingredients)
+                && !string.IsNullOrEmpty(_addRecipeViewModel.Prescription)
                 && base.CanExecute(parameter);
         }
         public override void Execute(object parameter)
