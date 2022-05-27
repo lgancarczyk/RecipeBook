@@ -1,6 +1,7 @@
 ﻿using RecipeBook.Core.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -11,9 +12,18 @@ namespace RecipeBook.Core.Core
     class AddRecipeCommand : CommandBase
     {
         private readonly AddRecipeViewModel _addRecipeViewModel;
-        public AddRecipeCommand(AddRecipeViewModel obj)
+        public AddRecipeCommand(AddRecipeViewModel addRecipeViewModel)
         {
-            _addRecipeViewModel = obj;
+            _addRecipeViewModel = addRecipeViewModel;
+            _addRecipeViewModel.PropertyChanged += OnViewModelPropertyChanged;
+        }
+
+        private void OnViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(AddRecipeViewModel.Title))
+            {
+                OnCanExecutedChanged();
+            }
         }
 
         public override bool CanExecute(object parameter)
