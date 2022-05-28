@@ -39,6 +39,15 @@ namespace RecipeBook.Core.Core
         public override void Execute(object parameter)
         {
             Trace.WriteLine($"Its working {_addRecipeViewModel.Title}");
+            try
+            {
+                throw new NotImplementedException();
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
         }
     }
 }
