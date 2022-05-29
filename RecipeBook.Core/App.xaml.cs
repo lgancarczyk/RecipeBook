@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RecipeBook.Core.DBContext;
+using RecipeBook.Core.Database;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -15,14 +15,18 @@ namespace RecipeBook.Core
     /// </summary>
     public partial class App : Application
     {
-        private const string connectionString = "Data Source = recipeBook.db";
-
         protected override void OnStartup(StartupEventArgs e)
         {
-            DbContextOptions options = new DbContextOptionsBuilder().UseSqlite(connectionString).Options;
-            RecipeBookDbContext dbContext = new RecipeBookDbContext(options);
-            dbContext.Database.Migrate();
+
+            Db();
             base.OnStartup(e);
+        }
+
+        public void Db()
+        {
+            using var dbContext = new MyDbContext();
+
+            dbContext.Database.EnsureCreated();
         }
     }
 }

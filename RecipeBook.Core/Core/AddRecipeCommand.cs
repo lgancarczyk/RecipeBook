@@ -1,4 +1,7 @@
-﻿using RecipeBook.Core.ViewModels;
+﻿using RecipeBook.Core.Database;
+using RecipeBook.Core.Database.DbModels;
+using RecipeBook.Core.Services;
+using RecipeBook.Core.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -29,7 +32,7 @@ namespace RecipeBook.Core.Core
         public override bool CanExecute(object parameter)
         {
             //checks if all values are true 
-            return !string.IsNullOrEmpty(_addRecipeViewModel.Title) 
+            return !string.IsNullOrEmpty(_addRecipeViewModel.Title)
                 && !string.IsNullOrEmpty(_addRecipeViewModel.Tags)
                 && !string.IsNullOrEmpty(_addRecipeViewModel.NoOfPortions)
                 && !string.IsNullOrEmpty(_addRecipeViewModel.Ingredients)
@@ -41,13 +44,39 @@ namespace RecipeBook.Core.Core
             Trace.WriteLine($"Its working {_addRecipeViewModel.Title}");
             try
             {
-                throw new NotImplementedException();
-            }
-            catch (Exception e)
-            {
+                var recipe = new RecipeDbModel()
+                {
+                    Title = _addRecipeViewModel.Title,
+                };
+                var recipeId = RecipesService.AddRecipe(recipe);
+                Trace.WriteLine(recipeId);
 
-                throw e;
+
+                string[] rawTags = _addRecipeViewModel.Tags.Split(" ");
+                List<string> tags = new List<string>();
+                tags = rawTags.Distinct().ToList();
+
+
+                foreach (var tag in tags)
+                {
+                    tag.Trim().ToLower();
+                    if (tag != "")
+                    {
+                        var tagId = TagsService.AddTag(tag);
+                        Trace.WriteLine(tagId);
+
+                        var isSuccess = RecipesTagsService.AddRecipesTagsRecord(recipeId, tagId);
+
+                    }
+                }
+
+
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
+
     }
 }

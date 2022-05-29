@@ -18,8 +18,4 @@
     <PackageReference Include="Prism.Core" Version="8.1.97" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
-
 </Project>

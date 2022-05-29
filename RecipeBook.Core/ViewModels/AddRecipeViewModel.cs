@@ -11,7 +11,7 @@ using System.Windows.Input;
 
 namespace RecipeBook.Core.ViewModels
 {
-    class AddRecipeViewModel: ObservableObject
+    class AddRecipeViewModel : ObservableObject
     {
         public ICommand AddRecipeCommand { get; }
 
@@ -37,13 +37,13 @@ namespace RecipeBook.Core.ViewModels
             }
         }
         private string _tags;
-        public string Tags 
-        { 
-            get 
+        public string Tags
+        {
+            get
             {
                 return _tags;
             }
-            set 
+            set
             {
                 _tags = value;
                 OnPropertyChanged(nameof(Tags));
@@ -122,6 +122,6 @@ namespace RecipeBook.Core.ViewModels
             AddRecipeCommand = new AddRecipeCommand(this);
         }
 
-        
+
     }
 }
