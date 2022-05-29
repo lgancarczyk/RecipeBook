@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RecipeBook.Core.DBContext.Models
+namespace RecipeBook.Core.Database.DbModels
 {
-    public class RecipeDBModel
+    public class IngredientDbModel
     {
         [Key]
-        public Guid RecipeId { get; set; }
-        public string Title { get; set; }
+        public int IngredientId { get; set; }
+        public string IngredientName { get; set; }
     }
 }
