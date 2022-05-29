@@ -37,7 +37,16 @@ namespace RecipeBook.Core.Core
                 && !string.IsNullOrEmpty(_addRecipeViewModel.NoOfPortions)
                 && !string.IsNullOrEmpty(_addRecipeViewModel.Ingredients)
                 && !string.IsNullOrEmpty(_addRecipeViewModel.Prescription)
+                //&& IsNoOfPortionsInt()
                 && base.CanExecute(parameter);
+        }
+        public bool IsNoOfPortionsInt() 
+        {
+            int number;
+            
+                bool isInt = int.TryParse(_addRecipeViewModel.NoOfPortions, out number);
+            return isInt;
+            
         }
         public override void Execute(object parameter)
         {

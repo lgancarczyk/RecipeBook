@@ -45,6 +45,7 @@
 
             <TextBox x:Name="NoOfPortions"
                              Margin="10,10,10,0"
+                             PreviewTextInput="NumberValidationTextBox"
                              Text="{Binding NoOfPortions, UpdateSourceTrigger=PropertyChanged}"
                              Height="30"
                              Foreground="white"
