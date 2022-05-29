@@ -14,6 +14,9 @@ namespace RecipeBook.Core.Database.DbModels
         public int RecipeId { get; set; }
         public string Title { get; set; }
         public virtual ICollection<RecipeTagDbModel> RecipeTagDbModels { get; set; }
+        public int NoOfPortions { get; set; }
+        public virtual ICollection<RecipeIngredientDbModel> RecipeIngredientDbModels { get; set; }
+        public string Description { get; set; }
 
     }
 }

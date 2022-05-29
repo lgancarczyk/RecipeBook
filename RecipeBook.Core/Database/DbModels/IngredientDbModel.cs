@@ -12,5 +12,6 @@ namespace RecipeBook.Core.Database.DbModels
         [Key]
         public int IngredientId { get; set; }
         public string IngredientName { get; set; }
+        public ICollection<RecipeIngredientDbModel> RecipeIngredientDbModels { get; set; }
     }
 }
