@@ -13,7 +13,9 @@ namespace RecipeBook.Core.Database
         public  DbSet<RecipeDbModel> Recipes { get; set; }
         public  DbSet<TagDbModel> Tags { get; set; }
         public DbSet<RecipeTagDbModel> RecipeTagDbModels { get; set; }
-        public virtual DbSet<IngredientDbModel> Ingredients { get; set; }
+        public  DbSet<IngredientDbModel> Ingredients { get; set; }
+
+        public DbSet<RecipeIngredientDbModel> RecipeIngredientDbModels { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -40,6 +42,17 @@ namespace RecipeBook.Core.Database
                 .HasOne(rt => rt.TagDbModel)
                 .WithMany(t => t.RecipeTagDbModels)
                 .HasForeignKey(rt => rt.TagId);
+
+            modelBuilder.Entity<RecipeIngredientDbModel>()
+                .HasKey(rt => new { rt.RecipeId, rt.IngredientId });
+            modelBuilder.Entity<RecipeIngredientDbModel>()
+                .HasOne(rt => rt.RecipeDbModel)
+                .WithMany(r => r.RecipeIngredientDbModels)
+                .HasForeignKey(rt => rt.RecipeId);
+            modelBuilder.Entity<RecipeIngredientDbModel>()
+                .HasOne(rt => rt.IngredientDbModel)
+                .WithMany(t => t.RecipeIngredientDbModels)
+                .HasForeignKey(rt => rt.IngredientId);
 
             base.OnModelCreating(modelBuilder);
 
