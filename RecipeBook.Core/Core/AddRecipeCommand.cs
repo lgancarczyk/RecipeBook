@@ -47,6 +47,8 @@ namespace RecipeBook.Core.Core
                 var recipe = new RecipeDbModel()
                 {
                     Title = _addRecipeViewModel.Title,
+                    NoOfPortions = int.Parse(_addRecipeViewModel.NoOfPortions),
+                    Description = _addRecipeViewModel.Prescription
                 };
                 var recipeId = RecipesService.AddRecipe(recipe);
                 Trace.WriteLine(recipeId);
@@ -66,6 +68,23 @@ namespace RecipeBook.Core.Core
                         Trace.WriteLine(tagId);
 
                         var isSuccess = RecipesTagsService.AddRecipesTagsRecord(recipeId, tagId);
+
+                    }
+                }
+
+                string[] rawIngredients = _addRecipeViewModel.Ingredients.Split(" ");
+                List<string> ingredients = new List<string>();
+                ingredients = rawIngredients.Distinct().ToList();
+
+                foreach (var ingredient in ingredients)
+                {
+                    ingredient.Trim().ToLower();
+                    if (ingredient != "")
+                    {
+                        var ingredientId = IngredientsService.AddIngredient(ingredient);
+                        Trace.WriteLine(ingredientId);
+
+                        var isSuccess = RecipesIngredientsService.AddRecipesIngredientsRecord(recipeId, ingredientId);
 
                     }
                 }
