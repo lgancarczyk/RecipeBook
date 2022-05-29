@@ -80,7 +80,7 @@
         <Button Grid.Row="3"
                 Width="100"
                 Height="30"
-                Content="Sumbmit"
+                Content="Submit"
                 FontSize="15"
                 FontWeight="Bold"
                 HorizontalAlignment="Right"

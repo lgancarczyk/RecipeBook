@@ -16,7 +16,7 @@ namespace RecipeBook.Core.ViewModels
         public ICommand AddRecipeCommand { get; }
 
 
-        private string _title = "Enter Title:";
+        private string _title;
         public string Title
         {
             get

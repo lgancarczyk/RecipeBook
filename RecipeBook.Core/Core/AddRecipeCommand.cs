@@ -8,7 +8,9 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace RecipeBook.Core.Core
 {
@@ -98,12 +100,32 @@ namespace RecipeBook.Core.Core
                     }
                 }
 
+                ClearInputs();
+
 
             }
             catch (Exception)
             {
                 throw;
             }
+        }
+
+        private void ClearInputs() 
+        {
+            _addRecipeViewModel.Title = "";
+            _addRecipeViewModel.Tags = "";
+            _addRecipeViewModel.NoOfPortions = "";
+            _addRecipeViewModel.Ingredients = "";
+            _addRecipeViewModel.Prescription = "";
+
+            var thread = new Thread(
+                     () =>
+                     {
+                         MessageBox.Show("Recipe Added",
+                                    "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                     });
+            thread.Start();
         }
 
     }
