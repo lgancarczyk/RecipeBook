@@ -19,5 +19,13 @@ namespace RecipeBook.Core.Services
                 return addedRecipe.Entity.RecipeId;
             }
         }
+
+        public static List<RecipeDbModel> GetAllRecipes() 
+        {
+            using (var context = new MyDbContext())
+            {
+                return context.Recipes.ToList();
+            }
+        }
     }
 }

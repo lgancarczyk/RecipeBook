@@ -41,5 +41,21 @@ namespace RecipeBook.Core.Services
             }
         }
 
+
+        public static List<string> GetIngredientsName(List<int> ingredientsIds)
+        {
+            List<string> ingredientsNames = new List<string>();
+
+            using (var context = new MyDbContext())
+            {
+                foreach (var item in ingredientsIds)
+                {
+                    ingredientsNames.Add(context.Ingredients.Where(x => x.IngredientId == item).Select(x => x.IngredientName).Single());
+                }
+                return ingredientsNames;
+
+            }
+        }
+
     }
 }

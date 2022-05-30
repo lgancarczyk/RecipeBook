@@ -31,13 +31,28 @@ namespace RecipeBook.Core.Services
             }
         }
 
-        public static  int FindTag(string TagName)
+        public static int FindTag(string TagName)
         {
             using (var context = new MyDbContext())
             {
                 int tagId = context.Tags.Where(x => x.TagName == TagName)
                 .Select(x => x.TagId).FirstOrDefault();
                 return tagId;
+            }
+        }
+
+        public static List<string> GetTagsName(List<int> tagsIds) 
+        {
+            List<string> tagsNames = new List<string>();
+
+            using (var context = new MyDbContext())
+            {
+                foreach (var item in tagsIds)
+                {
+                    tagsNames.Add(context.Tags.Where(x => x.TagId == item).Select(x => x.TagName).Single());
+                }
+                return tagsNames;
+                
             }
         }
 

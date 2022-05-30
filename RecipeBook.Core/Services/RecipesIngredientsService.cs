@@ -35,5 +35,13 @@ namespace RecipeBook.Core.Services
             }
         }
 
+        public static List<int> GetIngredientsIds(int recipeId)
+        {
+            using (var context = new MyDbContext())
+            {
+                return context.RecipeIngredientDbModels.Where(x => x.RecipeId == recipeId).Select(x => x.IngredientId).ToList();
+            }
+        }
+
     }
 }

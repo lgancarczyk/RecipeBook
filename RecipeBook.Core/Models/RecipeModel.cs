@@ -8,11 +8,11 @@ namespace RecipeBook.Core.Models
 {
     public class RecipeModel
     {
+        public int RecipeId { get; set; }
         public string Title { get; set; }
-        //public List<string> Tags { get; set; }
-        //public int CookingTime { get; set; }
-        //public int NumberOfPortions { get; set; }
-        //public List<string> Ingredients { get; set; }
-        //public string Description { get; set; }
+        public string Tags { get; set; }
+        public int NoOfPortions { get; set; }
+        public string Ingredients { get; set; }
+        public string Description { get; set; }
     }
 }
