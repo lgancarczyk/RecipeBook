@@ -4,10 +4,12 @@ using RecipeBook.Core.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 
 namespace RecipeBook.Core.Core
 {
@@ -18,13 +20,30 @@ namespace RecipeBook.Core.Core
         public ShowRecipesCommand( RecipeViewModel recipeViewModel)
         {
             _recipeViewModel = recipeViewModel;
+            //_recipeViewModel.PropertyChanged += OnViewModelPropertyChanged;
         }
+
+        //private void OnViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
+        //{
+
+        //    OnCanExecutedChanged();
+
+        //}
         public override void Execute(object parameter)
         {
-            _recipeViewModel.recipes = GetAllFullRecipes();
+            if (_recipeViewModel.SearchText == null || _recipeViewModel.SearchText ==String.Empty)
+            {
+                _recipeViewModel.recipes.Clear();
+                foreach (var item in GetAllFullRecipes())
+                {
+                    _recipeViewModel.recipes.Add(item);
+                }
+            }
             
-
-            //_recipeViewModel.recipes ;
+            else
+            {
+                _recipeViewModel.recipes.Clear();
+            }
         }
 
         public ObservableCollection<RecipeModel> GetAllFullRecipes() 

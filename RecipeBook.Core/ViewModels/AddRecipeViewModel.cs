@@ -116,7 +116,7 @@ namespace RecipeBook.Core.ViewModels
             }
         }
 
-        private bool IsStrEmpty(string str) => !string.IsNullOrEmpty(str);
+        private bool IsStrEmpty(string str) => string.IsNullOrEmpty(str);
 
         public AddRecipeViewModel()
         {

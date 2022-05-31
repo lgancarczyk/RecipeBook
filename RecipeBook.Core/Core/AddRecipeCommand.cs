@@ -52,7 +52,6 @@ namespace RecipeBook.Core.Core
         }
         public override void Execute(object parameter)
         {
-            Trace.WriteLine($"Its working {_addRecipeViewModel.Title}");
             try
             {
                 var recipe = new RecipeDbModel()
@@ -62,7 +61,6 @@ namespace RecipeBook.Core.Core
                     Description = _addRecipeViewModel.Prescription
                 };
                 var recipeId = RecipesService.AddRecipe(recipe);
-                Trace.WriteLine(recipeId);
 
 
                 string[] rawTags = _addRecipeViewModel.Tags.Split(" ");
@@ -76,7 +74,6 @@ namespace RecipeBook.Core.Core
                     if (tag != "")
                     {
                         var tagId = TagsService.AddTag(tag);
-                        Trace.WriteLine(tagId);
 
                         var isSuccess = RecipesTagsService.AddRecipesTagsRecord(recipeId, tagId);
 
@@ -93,7 +90,6 @@ namespace RecipeBook.Core.Core
                     if (ingredient != "")
                     {
                         var ingredientId = IngredientsService.AddIngredient(ingredient);
-                        Trace.WriteLine(ingredientId);
 
                         var isSuccess = RecipesIngredientsService.AddRecipesIngredientsRecord(recipeId, ingredientId);
 
