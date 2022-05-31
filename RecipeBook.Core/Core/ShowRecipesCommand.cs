@@ -1,4 +1,5 @@
-﻿using RecipeBook.Core.Models;
+﻿using RecipeBook.Core.Database.DbModels;
+using RecipeBook.Core.Models;
 using RecipeBook.Core.Services;
 using RecipeBook.Core.ViewModels;
 using System;
@@ -43,32 +44,64 @@ namespace RecipeBook.Core.Core
             else
             {
                 _recipeViewModel.recipes.Clear();
+                var recipesByTag = GetFullRecipesByTag(_recipeViewModel.SearchText);
+                foreach (var item in recipesByTag) 
+                {
+                    _recipeViewModel.recipes.Add(item);
+                }
             }
         }
 
-        public ObservableCollection<RecipeModel> GetAllFullRecipes() 
+        public List<RecipeModel> GetFullRecipesByTag(string tag)
         {
-            ObservableCollection<RecipeModel> result = new ObservableCollection<RecipeModel>();
+            var tagId = TagsService.FindTag(tag);
 
+            if (tagId != 0)
+            {
+                List<RecipeDbModel> rawRecipes = new List<RecipeDbModel>();
+                var rawRecipesIds = RecipesTagsService.GetRecipesIds(tagId);
+                foreach (var id in rawRecipesIds)
+                {
+                    var rawRecipe = RecipesService.GetRecipe(id);
+                    rawRecipes.Add(rawRecipe);
+                }
+                return IterateThroughGetWholeRecipes(rawRecipes);
+            }
+            return new List<RecipeModel>();
+        }
+        public List<RecipeModel> GetAllFullRecipes() 
+        {
             var rawRecipes = RecipesService.GetAllRecipes();
+            return IterateThroughGetWholeRecipes(rawRecipes);
+        }
+
+        private List<RecipeModel> IterateThroughGetWholeRecipes(List<RecipeDbModel> rawRecipes) 
+        {
+            List<RecipeModel> result = new List<RecipeModel>();
+
             foreach (var rawRecipe in rawRecipes)
             {
-                RecipeModel recipeModel = new RecipeModel();
-                recipeModel.RecipeId = rawRecipe.RecipeId;
-                recipeModel.Title = rawRecipe.Title;
-                recipeModel.NoOfPortions = rawRecipe.NoOfPortions;
-                recipeModel.Description = rawRecipe.Description;
-
-                var tagsIdsList = RecipesTagsService.GetTagsIds(rawRecipe.RecipeId);
-                recipeModel.Tags = String.Join(" ", TagsService.GetTagsName(tagsIdsList));
-
-                var ingredientsIdsList = RecipesIngredientsService.GetIngredientsIds(rawRecipe.RecipeId);
-                recipeModel.Ingredients = String.Join(" ", IngredientsService.GetIngredientsName(ingredientsIdsList));
-
-                result.Add(recipeModel);
+                var recipe = GetWholeRecipe(rawRecipe);
+                result.Add(recipe);
             }
-
             return result;
+        }
+
+        private RecipeModel GetWholeRecipe(RecipeDbModel rawRecipe) 
+        {
+            RecipeModel recipeModel = new RecipeModel();
+            recipeModel.RecipeId = rawRecipe.RecipeId;
+            recipeModel.Title = rawRecipe.Title;
+            recipeModel.NoOfPortions = rawRecipe.NoOfPortions;
+            recipeModel.Description = rawRecipe.Description;
+
+            var tagsIdsList = RecipesTagsService.GetTagsIds(rawRecipe.RecipeId);
+            recipeModel.Tags = String.Join(" ", TagsService.GetTagsName(tagsIdsList));
+
+            var ingredientsIdsList = RecipesIngredientsService.GetIngredientsIds(rawRecipe.RecipeId);
+            recipeModel.Ingredients = String.Join(" ", IngredientsService.GetIngredientsName(ingredientsIdsList));
+
+            return recipeModel;
         }
     }
 }

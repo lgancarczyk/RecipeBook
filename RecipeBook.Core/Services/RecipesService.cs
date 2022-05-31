@@ -27,5 +27,13 @@ namespace RecipeBook.Core.Services
                 return context.Recipes.ToList();
             }
         }
+
+        public static RecipeDbModel GetRecipe(int recipeId)
+        {
+            using (var context = new MyDbContext())
+            {
+                return context.Recipes.Where(x => x.RecipeId == recipeId).Single();
+            }
+        }
     }
 }

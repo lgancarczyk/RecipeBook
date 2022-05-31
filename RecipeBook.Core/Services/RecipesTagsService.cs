@@ -41,5 +41,13 @@ namespace RecipeBook.Core.Services
                 return context.RecipeTagDbModels.Where(x => x.RecipeId == recipeId).Select(x => x.TagId).ToList();
             }
         }
+
+        public static List<int> GetRecipesIds(int tagId)
+        {
+            using (var context = new MyDbContext())
+            {
+                return context.RecipeTagDbModels.Where(x => x.TagId == tagId).Select(x => x.RecipeId).ToList();
+            }
+        }
     }
 }
