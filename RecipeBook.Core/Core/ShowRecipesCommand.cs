@@ -21,15 +21,9 @@ namespace RecipeBook.Core.Core
         public ShowRecipesCommand( RecipeViewModel recipeViewModel)
         {
             _recipeViewModel = recipeViewModel;
-            //_recipeViewModel.PropertyChanged += OnViewModelPropertyChanged;
         }
 
-        //private void OnViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
-        //{
-
-        //    OnCanExecutedChanged();
-
-        //}
+        
         public override void Execute(object parameter)
         {
             if (_recipeViewModel.SearchText == null || _recipeViewModel.SearchText ==String.Empty)
@@ -44,12 +38,24 @@ namespace RecipeBook.Core.Core
             else
             {
                 _recipeViewModel.recipes.Clear();
+                var recipesByTitle = GetFullRecipesByTitle(_recipeViewModel.SearchText);
+                foreach (var item in recipesByTitle) 
+                {
+                    _recipeViewModel.recipes.Add(item);
+                }
+
                 var recipesByTag = GetFullRecipesByTag(_recipeViewModel.SearchText);
                 foreach (var item in recipesByTag) 
                 {
                     _recipeViewModel.recipes.Add(item);
                 }
             }
+        }
+
+        public List<RecipeModel> GetFullRecipesByTitle(string title)
+        {
+            var recipes = RecipesService.GetRecipesByTitle(title);
+            return IterateThroughGetWholeRecipes(recipes);
         }
 
         public List<RecipeModel> GetFullRecipesByTag(string tag)
@@ -69,6 +75,7 @@ namespace RecipeBook.Core.Core
             }
             return new List<RecipeModel>();
         }
+
         public List<RecipeModel> GetAllFullRecipes() 
         {
             var rawRecipes = RecipesService.GetAllRecipes();

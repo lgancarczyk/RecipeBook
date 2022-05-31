@@ -28,6 +28,14 @@ namespace RecipeBook.Core.Services
             }
         }
 
+        public static List<RecipeDbModel> GetRecipesByTitle(string _title)
+        {
+            using (var context = new MyDbContext())
+            {
+                return context.Recipes.Where(x => x.Title.Contains(_title)).ToList();
+            }
+        }
+
         public static RecipeDbModel GetRecipe(int recipeId)
         {
             using (var context = new MyDbContext())
@@ -35,5 +43,6 @@ namespace RecipeBook.Core.Services
                 return context.Recipes.Where(x => x.RecipeId == recipeId).Single();
             }
         }
+        
     }
 }
