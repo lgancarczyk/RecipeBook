@@ -9,9 +9,9 @@
              Background="Transparent"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <DockPanel>
+        <DockPanel Grid.Row="0">
             <Border Padding="10,5,10,5"
-                    Background="AliceBlue"
+                    Background="#39374f"
                     CornerRadius="10"
                     Height="auto"
                     Width="auto">
@@ -21,7 +21,8 @@
                                       Foreground="#272537"
                                       Width="20"/>
 
-                    <TextBox x:Name="FilterInput"
+                    <TextBox x:Name="SearchText"
+                            Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
                          Width="200"
                          Height="20"
                          FontSize="15"
@@ -36,7 +37,8 @@
                 </DockPanel>
 
             </Border>
-            <TextBlock Text=""
+            <TextBlock x:Name="RandomText"
+                       Text=""
                        FontSize="20"
                        HorizontalAlignment="Right"
                        VerticalAlignment="Center"
@@ -51,6 +53,55 @@
                 Margin="0,0,30,0"
                 Command="{Binding ShowRecipesCommand}"/>
         </DockPanel>
+
+        <ListView ItemsSource="{Binding recipes}"
+                 Grid.Row="1"
+                 Background="Transparent"
+                 BorderThickness="0"
+                 HorizontalContentAlignment="Stretch"
+                 ScrollViewer.CanContentScroll="False">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderThickness="0,0,0,2"
+                            BorderBrush="#39374f">
+                        <StackPanel VerticalAlignment="Stretch">
+                            
+                            <TextBlock Text="{Binding Title}"
+                                       FontSize="25"
+                                       Foreground="GhostWhite"
+                                       FontWeight="SemiBold"
+                                       Style="{StaticResource RecipeTextTheme}"/>
+                            
+                            <TextBlock Text="{Binding Tags}"
+                                       FontSize="13"
+                                       Style="{StaticResource RecipeTextTheme}"
+                                       Margin="0,0,0,10"/>
+                            <DockPanel>
+                                <TextBlock Text="Portions: "
+                                           Style="{StaticResource RecipeTextTheme}"/>
+                                <TextBlock Text="{Binding NoOfPortions}"
+                                           Style="{StaticResource RecipeTextTheme}"/>
+                            </DockPanel>
+                            <DockPanel Margin="0,0,0,10">
+                                <TextBlock Text="Ingredients: "
+                                           Style="{StaticResource RecipeTextTheme}"/>
+                                <TextBlock Text="{Binding Ingredients}"
+                                       Style="{StaticResource RecipeTextTheme}"/>
+                            </DockPanel>
+                            <TextBlock Text="{Binding Description}"
+                                       Style="{StaticResource RecipeTextTheme}"
+                                       Width="600"
+                                       HorizontalAlignment="Left"
+                                       TextWrapping="Wrap"/>
+                            
+                        </StackPanel>
+                    </Border>
+                    
+                   
+                 </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
