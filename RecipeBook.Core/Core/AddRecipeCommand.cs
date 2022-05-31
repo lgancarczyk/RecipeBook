@@ -25,10 +25,10 @@ namespace RecipeBook.Core.Core
 
         private void OnViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(AddRecipeViewModel.Title))
-            {
+            //if (e.PropertyName == nameof(AddRecipeViewModel.Title))
+           // {
                 OnCanExecutedChanged();
-            }
+           // }
         }
 
         public override bool CanExecute(object parameter)
