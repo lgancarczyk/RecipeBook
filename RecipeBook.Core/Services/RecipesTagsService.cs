@@ -8,8 +8,17 @@ using System.Threading.Tasks;
 
 namespace RecipeBook.Core.Services
 {
+    /// <summary>
+    /// Database queries to join table of Recipes and Tags
+    /// </summary>
     public static class RecipesTagsService
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="recipeId"></param>
+        /// <param name="tagId"></param>
+        /// <returns>bool</returns>
         public static bool AddRecipesTagsRecord(int recipeId, int tagId) 
         {
             try
@@ -34,6 +43,11 @@ namespace RecipeBook.Core.Services
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="recipeId"></param>
+        /// <returns>list of tags ids that are connectoed tyo recipe</returns>
         public static List<int> GetTagsIds(int recipeId) 
         {
             using (var context = new MyDbContext())
@@ -42,6 +56,11 @@ namespace RecipeBook.Core.Services
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tagId"></param>
+        /// <returns>list of recipes ids which contains given tag</returns>
         public static List<int> GetRecipesIds(int tagId)
         {
             using (var context = new MyDbContext())

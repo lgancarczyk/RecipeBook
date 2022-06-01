@@ -8,9 +8,17 @@ using System.Threading.Tasks;
 
 namespace RecipeBook.Core.Services
 {
+    /// <summary>
+    /// Database queries to join tableof Recipes and Ingredients
+    /// </summary>
     public static class RecipesIngredientsService
     {
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="recipeId"></param>
+        /// <param name="ingredientId"></param>
+        /// <returns>True</returns>
         public static bool AddRecipesIngredientsRecord(int recipeId, int ingredientId)
         {
             try
@@ -34,7 +42,11 @@ namespace RecipeBook.Core.Services
                 throw e;
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="recipeId"> recipe id</param>
+        /// <returns>List of ingredients ids</returns>
         public static List<int> GetIngredientsIds(int recipeId)
         {
             using (var context = new MyDbContext())

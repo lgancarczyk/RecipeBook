@@ -14,8 +14,12 @@ namespace RecipeBook.Core.ViewModels
 
         public AddRecipeViewModel _addRecipeViewModel { get; set; }
         public RecipeViewModel _recipeViewModel { get; set; }
-        public object _currentView;
 
+
+        /// <summary>
+        /// Current Active UserControll
+        /// </summary>
+        public object _currentView;
         public object CurrentView
         {
             get { return _currentView; }

@@ -14,11 +14,21 @@ namespace RecipeBook.Core.ViewModels
 {
     class RecipeViewModel: ObservableObject
     {
+
+        /// <summary>
+        /// list of recipes
+        /// </summary>
         public ObservableCollection<RecipeModel> recipes { get; set; } = new ObservableCollection<RecipeModel>();
 
-
+        /// <summary>
+        /// command to show/refresh recipe list
+        /// </summary>
         public ICommand ShowRecipesCommand { get; }
 
+
+        /// <summary>
+        /// Text from search bar
+        /// </summary>
         private string _searchText;
         public string SearchText
         {
@@ -30,18 +40,7 @@ namespace RecipeBook.Core.ViewModels
             {
                 _searchText = value;
                 OnPropertyChanged(nameof(SearchText));
-
-
-                //if (!IsStrEmpty(SearchText))
-                //{
-                //    Trace.WriteLine("Error like that");
-                //}
             }
-        }
-
-        private bool IsStrEmpty(object tags)
-        {
-            throw new NotImplementedException();
         }
 
         public RecipeViewModel()

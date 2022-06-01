@@ -8,8 +8,16 @@ using System.Threading.Tasks;
 
 namespace RecipeBook.Core.Services
 {
+    /// <summary>
+    /// Database queries to Recipes table
+    /// </summary>
     public static class RecipesService
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="recipe"> recipe model</param>
+        /// <returns>added recipe Id</returns>
         public static int AddRecipe(RecipeDbModel recipe)
         {
             using (var context = new MyDbContext())
@@ -20,6 +28,10 @@ namespace RecipeBook.Core.Services
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>List of all recipes</returns>
         public static List<RecipeDbModel> GetAllRecipes() 
         {
             using (var context = new MyDbContext())
@@ -28,6 +40,11 @@ namespace RecipeBook.Core.Services
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="_title"> part of recipe title</param>
+        /// <returns>list of recipes by title</returns>
         public static List<RecipeDbModel> GetRecipesByTitle(string _title)
         {
             using (var context = new MyDbContext())
@@ -36,6 +53,11 @@ namespace RecipeBook.Core.Services
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="recipeId"></param>
+        /// <returns>recipe model </returns>
         public static RecipeDbModel GetRecipe(int recipeId)
         {
             using (var context = new MyDbContext())

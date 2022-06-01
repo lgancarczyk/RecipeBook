@@ -8,9 +8,17 @@ using System.Threading.Tasks;
 
 namespace RecipeBook.Core.Services
 {
+    /// <summary>
+    /// Database queries to Tags table
+    /// </summary>
     public static class TagsService
     {
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tagName"></param>
+        /// <returns>id of tag by given name</returns>
         public static int AddTag(string tagName)
         {
             using (var context = new MyDbContext())
@@ -31,16 +39,26 @@ namespace RecipeBook.Core.Services
             }
         }
 
-        public static int FindTag(string TagName)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tagName"></param>
+        /// <returns>tag id</returns>
+        public static int FindTag(string tagName)
         {
             using (var context = new MyDbContext())
             {
-                int tagId = context.Tags.Where(x => x.TagName == TagName)
+                int tagId = context.Tags.Where(x => x.TagName == tagName)
                 .Select(x => x.TagId).FirstOrDefault();
                 return tagId;
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tagsIds">list of tags ids</param>
+        /// <returns>returns list of tags name by their ids</returns>
         public static List<string> GetTagsName(List<int> tagsIds) 
         {
             List<string> tagsNames = new List<string>();

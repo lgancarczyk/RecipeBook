@@ -11,11 +11,20 @@ using System.Windows.Input;
 
 namespace RecipeBook.Core.ViewModels
 {
+    /// <summary>
+    /// View model of AddRecipeView
+    /// </summary>
     class AddRecipeViewModel : ObservableObject
     {
+        /// <summary>
+        /// Command To Add recipes
+        /// </summary>
         public ICommand AddRecipeCommand { get; }
 
 
+        /// <summary>
+        /// given title
+        /// </summary>
         private string _title;
         public string Title
         {
@@ -37,6 +46,10 @@ namespace RecipeBook.Core.ViewModels
                 //OnPropertyChanged(nameof(CanCreateReservation));
             }
         }
+
+        /// <summary>
+        /// given tags
+        /// </summary>
         private string _tags;
         public string Tags
         {
@@ -56,6 +69,10 @@ namespace RecipeBook.Core.ViewModels
                 }
             }
         }
+
+        /// <summary>
+        /// given number of portions
+        /// </summary>
         private string _noOfPortions;
         public string NoOfPortions
         {
@@ -76,6 +93,9 @@ namespace RecipeBook.Core.ViewModels
             }
         }
 
+        /// <summary>
+        /// given ingredients
+        /// </summary>
         private string _ingredients;
         public string Ingredients
         {
@@ -95,7 +115,9 @@ namespace RecipeBook.Core.ViewModels
                 }
             }
         }
-
+        /// <summary>
+        /// Actual recipe
+        /// </summary>
         private string _prescription;
         public string Prescription
         {
