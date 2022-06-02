@@ -62,6 +62,12 @@
                  BorderThickness="0"
                  HorizontalContentAlignment="Stretch"
                  ScrollViewer.CanContentScroll="False">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="Focusable" Value="False"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border BorderThickness="0,0,0,2"

@@ -4,13 +4,7 @@ using RecipeBook.Core.Services;
 using RecipeBook.Core.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Data;
 
 namespace RecipeBook.Core.Core
 {
@@ -26,6 +20,7 @@ namespace RecipeBook.Core.Core
         
         public override void Execute(object parameter)
         {
+            List<RecipeModel> recipeList = new List<RecipeModel>();
             if (_recipeViewModel.SearchText == null || _recipeViewModel.SearchText ==String.Empty)
             {
                 _recipeViewModel.recipes.Clear();
@@ -41,13 +36,22 @@ namespace RecipeBook.Core.Core
                 var recipesByTitle = GetFullRecipesByTitle(_recipeViewModel.SearchText);
                 foreach (var item in recipesByTitle) 
                 {
-                    _recipeViewModel.recipes.Add(item);
+                    recipeList.Add(item); 
                 }
 
                 var recipesByTag = GetFullRecipesByTag(_recipeViewModel.SearchText);
                 foreach (var item in recipesByTag) 
                 {
-                    _recipeViewModel.recipes.Add(item);
+                    recipeList.Add(item);
+                }
+
+                List<RecipeModel> distinctRecipe = recipeList
+                  .GroupBy(p => p.RecipeId)
+                  .Select(g => g.First())
+                  .ToList();
+                foreach (var recipe in distinctRecipe)
+                {
+                    _recipeViewModel.recipes.Add(recipe);
                 }
             }
         }

@@ -49,7 +49,7 @@ namespace RecipeBook.Core.Services
         {
             using (var context = new MyDbContext())
             {
-                return context.Recipes.Where(x => x.Title.Contains(_title)).ToList();
+                return context.Recipes.Where(x => x.Title.ToLower().Contains(_title.ToLower())).ToList();
             }
         }
 

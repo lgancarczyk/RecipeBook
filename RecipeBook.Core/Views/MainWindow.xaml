@@ -6,7 +6,7 @@
         xmlns:viewModel ="clr-namespace:RecipeBook.Core.ViewModels"
         xmlns:local="clr-namespace:RecipeBook.Core"
         mc:Ignorable="d"
-        Title="RecipeBook" Height="800" Width="900">
+        Title="CookBook" Height="800" Width="900">
     <Window.DataContext>
         <viewModel:MainWindowViewModel/>
     </Window.DataContext>
