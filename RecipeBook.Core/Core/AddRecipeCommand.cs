@@ -50,6 +50,11 @@ namespace RecipeBook.Core.Core
             return isInt;
             
         }
+
+        /// <summary>
+        /// Adds Given recipe to the database
+        /// </summary>
+        /// <param name="parameter">ViewModel</param>
         public override void Execute(object parameter)
         {
             try

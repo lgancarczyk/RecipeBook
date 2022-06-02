@@ -17,7 +17,11 @@ namespace RecipeBook.Core.Core
             _recipeViewModel = recipeViewModel;
         }
 
-        
+        /// <summary>
+        /// Button click exucution. Adds to ViemModel`s 
+        /// observablecollection Full Recipes (with tags and ingredients)
+        /// </summary>
+        /// <param name="parameter">viemModel</param>
         public override void Execute(object parameter)
         {
             List<RecipeModel> recipeList = new List<RecipeModel>();
@@ -56,13 +60,13 @@ namespace RecipeBook.Core.Core
             }
         }
 
-        public List<RecipeModel> GetFullRecipesByTitle(string title)
+        private List<RecipeModel> GetFullRecipesByTitle(string title)
         {
             var recipes = RecipesService.GetRecipesByTitle(title);
             return IterateThroughGetWholeRecipes(recipes);
         }
 
-        public List<RecipeModel> GetFullRecipesByTag(string tag)
+        private List<RecipeModel> GetFullRecipesByTag(string tag)
         {
             var tagId = TagsService.FindTag(tag);
 
@@ -80,7 +84,7 @@ namespace RecipeBook.Core.Core
             return new List<RecipeModel>();
         }
 
-        public List<RecipeModel> GetAllFullRecipes() 
+        private List<RecipeModel> GetAllFullRecipes() 
         {
             var rawRecipes = RecipesService.GetAllRecipes();
             return IterateThroughGetWholeRecipes(rawRecipes);
